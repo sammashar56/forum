@@ -5,7 +5,7 @@ import User from "../models/user";
 export const createUser = async userParam => {
     //check email and user name in user
     if (valid.isEmpty(userParam.password)) {
-        throw {
+        throw { 
             status: 400,
             message: "provide password"
         };
@@ -88,6 +88,9 @@ export const loginUser = async userParam => {
         }
       }
 };
+
+
+
     
 
 

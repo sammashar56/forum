@@ -1,8 +1,8 @@
 import jwt from "jsonwebtokens";
-import dotenv from "dotenv";
+import config from "../config";
 
-dotenv.config();
-const Tksecret = prcess.env.TOKEN_secret
+const Tksecret = config.token.token 
+
 
 export const jwtSignature = payload => {
     return jwt.sign(

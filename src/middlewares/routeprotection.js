@@ -1,13 +1,9 @@
 import jwt from "jsonwebtokens";
-
-import dotenv from "dotenv";
+import config from "../config";
 
 import User from "../models/user";
 
-
-dotenv.config();
-
-Tksecret = process.env.TOKEN_secret
+const Tksecret = config.token.token
 
 
 const authorize = (req, res, next) => {
@@ -40,5 +36,6 @@ const authorize = (req, res, next) => {
         });   
     });
 };
+
 
 export default authorize; 

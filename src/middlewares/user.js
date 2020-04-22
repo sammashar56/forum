@@ -1,7 +1,7 @@
 import {loginUser, createUser} from '../controllers/auth';
 
 export const registerUser = (req, res, next) => {
-const domain = req.protocol + "://" + req.get("host");
+//const domdomainain = req.protocol + "://" + req.get("host");
   const data = {
     ...req.body,
     domain
@@ -29,4 +29,9 @@ export const login = (req, res, next) => {
         res.status(err.status).json({ ...err});
     });
 };
+
+
+
+
+
 
