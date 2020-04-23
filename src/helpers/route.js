@@ -11,4 +11,4 @@ export default {
         update: "/forum/forum_id",
         add: "/add-forum/:forum_id"
     }
-}
+} 

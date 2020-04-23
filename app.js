@@ -6,22 +6,21 @@ import bodyParser from "body-parser";
 import chalk from "chalk";
 import logs from "morgan";
 import cors from "cors";
-import process from "process";
 import dotenv from "dotenv";
+import requestIP from "request-ip";
+import process from "process";
 import compression from "compression";
 import config from "./src/config";
-//import  Routes from "./src/helpers/route";
+import  Routes from "./src/helpers/route";
 
 //api endpoints
 
 //import authApi from "./src/api/auth";
 //import forumApi from "./src/api/forum";
 
-
-
+dotenv.config();
 
 const app = express();
-
 
 app.use(bodyParser.json());
 
@@ -31,7 +30,7 @@ app.use(express.static(__dirname, {dotfiles: "allow"}));
 
 app.enable("trust proxy");
 
-//app.use(requestIP.mw());
+app.use(requestIP.mw());
 
 //Enable cors 
 app.use(cors());
@@ -57,17 +56,16 @@ app.use(cors());
 app.use(compression());
 
 //api endpoints
-api.use(Routes.root, authApi);
-api.use(Routes.root, forumApi);
 
+//app.use(Routes.root, authApi);
+//app.use(Routes.root, forumApi);
 
 //set the port
 app.set("port", process.env.port || 3300);
 
-
 //run the server 
 
-app.litsen(app.get("port"), err => {
+app.listen(app.get("port"), err => {
     if (err) console.log("server stopped due to " + err.message);
     console.log(chalk.green("server is running in port "+ app.get("port")));
 
