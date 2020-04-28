@@ -1,7 +1,7 @@
 import express from 'express';
 import Routes from "../helpers/route";
 
-import {fetchForums,fetchSpecificforum,removeForum,editForum, addforum} from "../middlewares/forum";
+import {fetchForums, fetchSpecificforum, removeForum, editForum, addforum} from "../middlewares/forum";
 
 //import {auth} from "../middlewares/routeprotection"
 import routeprotector from "../middlewares/routeprotection";

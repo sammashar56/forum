@@ -43,50 +43,36 @@ export const createUser = async userParam => {
     }       
 } 
 
-export const loginUser = async userParam => {
-    //validate user
 
-    if (!valid.isEmail(userParam.email)) {
-        throw {
-            status: 400,
-            message: `Email ${userParam.email} is not valid`
-        }
-    }
-    else if (!valid.isLength(userParam.password, { min: 6, max: 30})) {
-        throw {
-          status: 400,
-          message: "Password should be more than six characters"
-        };
-      } else {
-        const user = await User.findOne({ email: userParam.email });
-    
+export const loginUser = async userParam => {
+  // Validate user
+  if (!valid.isEmail(userParam.email)) {
+    throw { status: 400, message: `Email ${userParam.email} is not valid` };
+  } else if (!valid.isLength(userParam.password, { min: 6, max: 30 })) {
+    throw {
+      status: 400,
+      message: "Password should be more than six characters"
+    };
+  } else {
+    const user = await User.findOne({ email: userParam.email });
+
+    if (user) { 
+      if (bcrypt.compareSync(userParam.password, user.password)) {
         if (user) {
-          if (bcrypt.compareSync(userParam.password, user.password)) {
-            if (user.isVerified) {
-              return {
-                token: loginJwt(user.email),
-                refresh_token: refreshToken(user.email),
-                message: "Logged in successfully"
-              };
-            } else {
-              throw {
-                status: 403,
-                message: "Please verify your account, check your email"
-              };
-            }
-          } else {
-            throw {
-              status: 400,
-              message: "Invalid email/password"
-            };
-          }
+          return {
+            token: loginJwt(user.email),
+            refresh_token: refreshToken(user.email),
+            message: "Logged in successfully"
+          };
         } else {
           throw {
-            status: 404,
+            status: 400,
             message: "Invalid email/password"
           };
         }
-      }
+      } 
+    }
+  }
 };
 
 

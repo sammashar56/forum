@@ -15,7 +15,7 @@ import  Routes from "./src/helpers/route";
 
 //api endpoints
 
-//import authApi from "./src/api/auth";
+import authApi from "./src/api/auth";
 import forumApi from "./src/api/forum";
 
 
@@ -57,7 +57,7 @@ app.use(compression());
 
 //api endpoints
 
-//app.use(Routes.root, authApi);
+app.use(Routes.root, authApi);
 app.use(Routes.root, forumApi);
 
 //set the port

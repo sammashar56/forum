@@ -1,7 +1,7 @@
 import {loginUser, createUser} from '../controllers/auth';
 
 export const registerUser = (req, res, next) => {
-//const domdomainain = req.protocol + "://" + req.get("host");
+const domain = req.protocol + "://" + req.get("host");
   const data = {
     ...req.body,
     domain
@@ -19,7 +19,7 @@ export const registerUser = (req, res, next) => {
       });
     });
 };
-
+ 
 export const login = (req, res, next) => {
     loginUser(req.body)
     .then(response => {

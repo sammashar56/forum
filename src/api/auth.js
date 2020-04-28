@@ -5,9 +5,9 @@ import {login, registerUser} from "../middlewares/user";
 
 const api = express.Router();
 
-api.post(Routes.auth.signin, registerUser);
+api.post(Routes.auth.signup, registerUser);
 
-api.post(Routes.auth.login, login);
+api.post(Routes.auth.signin, login);
 
 
-export default api;  
+export default api;   
