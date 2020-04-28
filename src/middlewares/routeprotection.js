@@ -1,7 +1,7 @@
-import jwt from "jsonwebtokens";
+import jwt from "jsonwebtoken";
 import config from "../config";
 
-import User from "../models/user";
+import User from "../models/user"; 
 
 const Tksecret = config.token.token
 

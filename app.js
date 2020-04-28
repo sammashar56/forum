@@ -16,37 +16,37 @@ import  Routes from "./src/helpers/route";
 //api endpoints
 
 //import authApi from "./src/api/auth";
-//import forumApi from "./src/api/forum";
+import forumApi from "./src/api/forum";
 
-dotenv.config();
+
 
 const app = express();
 
+// Initialize environment
+dotenv.config();
+
+// Define json body reader
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(express.static(__dirname, { dotfiles: "allow" }));
 
-app.use(express.static(__dirname, {dotfiles: "allow"}));
-
+// Enable proxy x-Forwadded-*
 app.enable("trust proxy");
 
+// IP middleware
 app.use(requestIP.mw());
 
-//Enable cors 
-app.use(cors());
-
-// connect to database
+// Connect to database
 mongoose.connect(config.mongo.uri, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useCreateIndex: true
 });
 
 mongoose.connection.on("open", err => {
-    if (err) console.log(chalk.red("Error connecting to database"));
-    console.log(chalk.green("Connected to database successfully"));
+  if (err) console.log(chalk.red("Error connecting to database"));
+  console.log(chalk.green("Connected to database successfully"));
 });
-
   
 // log to server to request to console.
 app.use(logs("dev"));
@@ -58,7 +58,7 @@ app.use(compression());
 //api endpoints
 
 //app.use(Routes.root, authApi);
-//app.use(Routes.root, forumApi);
+app.use(Routes.root, forumApi);
 
 //set the port
 app.set("port", process.env.port || 3300);
