@@ -1,17 +1,12 @@
 import mongoose from "mongoose";
 
-
 const schema = mongoose.Schema;
 
 const forumSchema = Schema(
     { 
-        forum_id: {
-            type: Number,
-            required: true
-        },
         forum_comment: {
-            type: String,
-            required: true
+        type: String,
+        required: true
         },
         views: {
             type: Number,

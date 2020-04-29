@@ -40,7 +40,8 @@ app.use(requestIP.mw());
 // Connect to database
 mongoose.connect(config.mongo.uri, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 
 mongoose.connection.on("open", err => {

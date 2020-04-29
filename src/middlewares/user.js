@@ -14,7 +14,7 @@ const domain = req.protocol + "://" + req.get("host");
       });
     })
     .catch(err => {
-      res.status(err.status || 400).json({
+      res.status(err.status || 400).json({ 
         message: err.message
       });
     });

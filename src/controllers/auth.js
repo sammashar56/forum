@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import valid from "validator";
 
 import User from "../models/user";
 
@@ -42,8 +43,6 @@ export const createUser = async userParam => {
         return user;
     }       
 } 
-
-
 export const loginUser = async userParam => {
   // Validate user
   if (!valid.isEmail(userParam.email)) {
@@ -74,6 +73,7 @@ export const loginUser = async userParam => {
     }
   }
 };
+
 
 
 
