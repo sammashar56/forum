@@ -16,18 +16,18 @@ const domain = req.protocol + "://" + req.get("host");
     .catch(err => {
       res.status(err.status || 400).json({ 
         message: err.message
-      });
+      }); 
     });
-};
+}; 
  
-export const login = (req, res, next) => {
+export const login = (req, res) => {
     loginUser(req.body)
     .then(response => {
         res.status(200).json ({...response});
     })
     .catch(err => {
-        res.status(err.status).json({ ...err});
-    });
+      res.status(err.status).json({ ...err });
+    }); 
 };
 
 

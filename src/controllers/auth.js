@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import valid from "validator";
-
+import {loginJwt, refreshToken} from "../helpers/jwt"
 import User from "../models/user";
 
 export const createUser = async userParam => {
@@ -43,6 +43,7 @@ export const createUser = async userParam => {
         return user;
     }       
 } 
+
 export const loginUser = async userParam => {
   // Validate user
   if (!valid.isEmail(userParam.email)) {
@@ -55,28 +56,24 @@ export const loginUser = async userParam => {
   } else {
     const user = await User.findOne({ email: userParam.email });
 
-    if (user) { 
+    if (user) {
       if (bcrypt.compareSync(userParam.password, user.password)) {
-        if (user) {
-          return {
-            token: loginJwt(user.email),
-            refresh_token: refreshToken(user.email),
-            message: "Logged in successfully"
-          };
-        } else {
-          throw {
-            status: 400,
-            message: "Invalid email/password"
-          };
-        }
-      } 
+        return {
+          token: loginJwt(user.email),
+          refresh_token: refreshToken(user.email),
+          message: "Logged in successfully",
+        };
+      } else {
+        throw {
+          status: 400,
+          message: "Invalid password"
+        };
+      }
+    } else {
+      throw {
+        status: 400,
+        message: "Invalid email/password"
+      };
     }
   }
 };
-
-
-
-
-    
-
-

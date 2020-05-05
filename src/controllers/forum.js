@@ -1,9 +1,8 @@
-export const createForum = async (data, userId) => {
+export const createForum = async (data) => {
     const user = await User.findById(data.user);
 
     if(user) {
         const forum = new Forum({
-            forum_id: forum._id,
             forum_comment: forum_comment  
         });
         await forum.save();

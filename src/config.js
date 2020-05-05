@@ -9,7 +9,7 @@ const config = {
     },
     token:{
         token: process.env.TOKEN_secret
-    }
+    } 
 }
 
-export default config;
+export default config; 

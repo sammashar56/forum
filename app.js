@@ -11,7 +11,7 @@ import requestIP from "request-ip";
 import process from "process";
 import compression from "compression";
 import config from "./src/config";
-import  Routes from "./src/helpers/route";
+import Routes from "./src/helpers/route";
 
 //api endpoints
 

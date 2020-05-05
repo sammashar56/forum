@@ -1,13 +1,13 @@
-import jwt from "jsonwebtokens";
+import jwt from "jsonwebtoken";
 import config from "../config";
 
-const Tksecret = config.token.token 
+const Tksecret = config.token
 
 
 export const jwtSignature = payload => {
     return jwt.sign(
         {
-            data :payload
+            data: payload
         },
         Tksecret
     )
@@ -17,7 +17,7 @@ export const jwtVerify = token => {
         return jwt.verify(token, Tksecret, (err, decoded) => {
             if (err) {
                 throw {
-                    error:err.name,
+                    error: err.name,
                     message: `invalid token, try again later`,
                     status: 400
                 };
@@ -25,7 +25,6 @@ export const jwtVerify = token => {
             else {
                 return decoded.data;
             }
-
         });
     } catch (err){
         throw {
@@ -42,6 +41,6 @@ export const loginJwt = payload => {
             exp: Math.floor(Date.now() / 1000) + 60 * 3600 * 10,
             data: payload
         },
-        Tksecret
+        Tksecret 
     );
 };
