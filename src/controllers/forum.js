@@ -1,23 +1,32 @@
+import User from "../models/user"
+import Forum from "../models/forum"
+
 export const createForum = async (data) => {
     const user = await User.findById(data.user);
 
     if(user) {
-        const forum = new Forum({
-            forum_comment: forum_comment  
-        });
-        await forum.save();
+        
+        let forum_comment = data.forum_comment
+
+        const Newforum = new Forum({name : forum_comment});
+        await Newforum.save()
+        return {
+            message : "Forum created"
+        }
+       
+        
     }
     else {
         throw {
             status: 404,
             message: "user not found"
         }
-    }
-        
+    }     
+    
 }
     
 export const getOwnForums = async (userId, _query) => {
-    const user = await User.finOne({User: userId});
+    const user = await User.findOne({User: userId});
 
     if (user) {
         const forum = await Forum.find({forum: userId}, null, {
@@ -37,6 +46,7 @@ export const getOwnForums = async (userId, _query) => {
                 message:" no user found"
             };
     }
+    
 };
 
 export const getAllForums = async () => {
@@ -50,7 +60,7 @@ export const updateForum = async (userId) => {
     const user = await user.findById(userId);
 
         if (user) {
-            const updateforum =Forum.findOne({user: user_id});
+            const updateforum = Forum.findOne({user: user_id});
             if (updateforum){
                 Object.assign(forum, {
                 forum_comment: data.forum_comment || forum.forum_comment

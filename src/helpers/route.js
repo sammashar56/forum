@@ -10,5 +10,6 @@ export default {
         own_forums:"/user/forums",
         update: "/forum/forum_id",
         add: "/add-forum/:forum_id"
-    }
+    } 
 }   
+

@@ -5,28 +5,29 @@ const domain = req.protocol + "://" + req.get("host");
   const data = {
     ...req.body,
     domain
-  };
+  };                         
   createUser(data)
     .then(response => {
       res.status(201).json({
         message: "registration Succesful",
         user: response
-      });
+      });      
     })
-    .catch(err => {
+    .catch(err => {                        
       res.status(err.status || 400).json({ 
         message: err.message
       }); 
     });
 }; 
  
-export const login = (req, res) => {
+export const login = (req, res, next) => {
     loginUser(req.body)
-    .then(response => {
+    .then(response => { 
         res.status(200).json ({...response});
     })
     .catch(err => {
-      res.status(err.status).json({ ...err });
+      console.log(err)
+      res.status(err.status || 500).json({  message: err.message });
     }); 
 };
 

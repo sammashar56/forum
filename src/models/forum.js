@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const forumSchema = Schema(
     { 
@@ -8,6 +8,7 @@ const forumSchema = Schema(
         type: String,
         required: true
         },
+        
         views: {
             type: Number,
             required: false,

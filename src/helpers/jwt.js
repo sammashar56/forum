@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import config from "../config";
 
-const Tksecret = config.token
+const { token: { token }} = config;
 
 
 export const jwtSignature = payload => {
@@ -9,12 +9,12 @@ export const jwtSignature = payload => {
         {
             data: payload
         },
-        Tksecret
+        token
     )
 }
 export const jwtVerify = token => {
     try {
-        return jwt.verify(token, Tksecret, (err, decoded) => {
+        return jwt.verify(token, token, (err, decoded) => {
             if (err) {
                 throw {
                     error: err.name,
@@ -41,6 +41,6 @@ export const loginJwt = payload => {
             exp: Math.floor(Date.now() / 1000) + 60 * 3600 * 10,
             data: payload
         },
-        Tksecret 
+        token
     );
 };

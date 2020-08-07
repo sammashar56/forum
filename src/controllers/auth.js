@@ -60,7 +60,6 @@ export const loginUser = async userParam => {
       if (bcrypt.compareSync(userParam.password, user.password)) {
         return {
           token: loginJwt(user.email),
-          refresh_token: refreshToken(user.email),
           message: "Logged in successfully",
         };
       } else {
