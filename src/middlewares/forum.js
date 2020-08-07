@@ -52,11 +52,12 @@ export const editForum = (req, res, next) => {
   export const addforum = (req, res, next) => {
     const data = {
       ...req.body,
-      user: req.user._id
+      user: req.user._id,
+        forum_id: req.params.forum_id
     };
 
   //check the parameters controller.
-    createForum(data, req.params.forum_id)
+    createForum(data)
       .then(Res => {
         res.status(201).json(Res);
       })
