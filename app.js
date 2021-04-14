@@ -25,12 +25,10 @@ const app = express();
 // Initialize environment
 dotenv.config();
 
-// Define json body reader
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname, { dotfiles: "allow" }));
 
+app.use(cors());
 // Enable proxy x-Forwadded-*
 app.enable("trust proxy");
 
@@ -44,6 +42,12 @@ mongoose.connect(config.mongo.uri, {
   useUnifiedTopology: true
 });
 
+
+// Define json body reader
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 mongoose.connection.on("open", err => {
   if (err) console.log(chalk.red("Error connecting to database"));
   console.log(chalk.green("Connected to database successfully"));
@@ -53,7 +57,7 @@ mongoose.connection.on("open", err => {
 app.use(logs("dev"));
 //enable cors
 
-app.use(cors());
+
 app.use(compression());
 
 //api endpoints

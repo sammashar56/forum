@@ -8,15 +8,15 @@ const forumSchema = Schema(
         type: String,
         required: true
         },
-        
+        user: {
+            type:Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
         views: {
             type: Number,
             required: false,
             default: 0
-        },
-        user: {
-            type:Schema.Types.ObjectId,
-            ref: "User"
         },
     },
     {

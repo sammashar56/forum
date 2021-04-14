@@ -3,15 +3,14 @@ import Routes from "../helpers/route";
 
 import {fetchForums, fetchSpecificforum, removeForum, editForum, addforum} from "../middlewares/forum";
 
-//import {auth} from "../middlewares/routeprotection"
 import routeprotector from "../middlewares/routeprotection";
 
-
+ 
 const api = express.Router();
  
-// getting all forums
+// getting all forums 
 api.get(Routes.forum.all, fetchForums);
-
+ 
 //fetching own forums should be protected
 api.get(Routes.forum.own_forums, routeprotector,  fetchSpecificforum);
 
@@ -21,7 +20,7 @@ api.put(Routes.forum.update, routeprotector, editForum);
 
 // deleting own forum protected
 
-api.delete(Routes.forum.update, routeprotector, removeForum);
+api.delete(Routes.forum.delete, routeprotector, removeForum);
 
 // adding own forum protected route
 

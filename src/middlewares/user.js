@@ -7,7 +7,7 @@ const domain = req.protocol + "://" + req.get("host");
     domain
   };                         
   createUser(data)
-    .then(response => {
+    .then(response => { 
       res.status(201).json({
         message: "registration Succesful",
         user: response
